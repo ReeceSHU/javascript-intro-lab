@@ -1,49 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Demo Site</title>
-    <link rel="stylesheet" type="text/css" href="css/mobile.css" />
-    <link
-      rel="stylesheet"
-      media="only screen and (min-width:720px)"
-      href="css/desktop.css"
-    />
-    <script>
-      console.dir(document);
-    </script>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1 id="myHeading">My Demo Site</h1>
-      </header>
-      <div class="main">
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="exchangeRate.html">Exchange Calculator</a></li>
-            <li><a href="aboutUs.html">About Us</a></li>
-          </ul>
-        </nav>
-        <div class="content">
-          <h2>Rotating Images</h2>
-          <p>
-            <img src="" alt="Winter Gardens" id="myImages" />
-          </p>
-          <p>
-            Change Background colour: <span class="red colPicker">Red</span>,
-            <span class="green colPicker">Green</span>,
-            <span class="blue colPicker">Blue</span>,
-            <span class="reset colPicker">Default</span>
-          </p>
-          <div>
-            <button id="myTestBtn">Test Button</button>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Demo Site</title>
+  <link rel="stylesheet" type="text/css" href="css/mobile.css" />
+  <link rel="stylesheet" media="only screen and (min-width:720px)" href="css/desktop.css" />
+  <script>
+    console.dir(document);
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1 id="myHeading">My Demo Site</h1>
+    </header>
+    <div class="main">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="exchangeRate.html">Exchange Calculator</a></li>
+          <li><a href="aboutUs.html">About Us</a></li>
+        </ul>
+      </nav>
+      <div class="content">
+        <h2>Rotating Images</h2>
+        <p>
+          <img src="images/view1.jpg" alt="Winter Gardens" id="myImages" />
+        </p>
+        <p>
+          Change Background colour: <span class="red colPicker">Red</span>,
+          <span class="green colPicker">Green</span>,
+          <span class="blue colPicker">Blue</span>,
+          <span class="reset colPicker">Default</span>
+        </p>
+        <div>
+          <button id="myTestBtn">Test Button</button>
         </div>
       </div>
-      <footer>&copy; 2024 mustbebuilt</footer>
     </div>
-  </body>
+    <footer>&copy; 2024 mustbebuilt</footer>
+  </div>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+    // Image Rotator
+    let intId = setInterval(nextImage, 2000);
+    document.getElementById('myImages').addEventListener('click', () => {
+      nextImage();
+      clearInterval(intId);
+      intId = null;
+      setTimeout(() => { intId = setInterval(nextImage, 2000) }, 400);
+    });
+    let currentIndex = 0;
+    function nextImage() {
+      const imgArr = ['images/view1.jpg', 'images/view2.jpg', 'images/view3.jpg', 'images/view4.jpg', 'images/view5.jpg', 'images/view6.jpg'];
+      currentIndex++;
+      if (currentIndex >= imgArr.length) {
+        currentIndex = 0;
+      }
+      document.getElementById('myImages').setAttribute('src', imgArr[currentIndex]);
+    }
+  </script>
+</body>
+
 </html>
